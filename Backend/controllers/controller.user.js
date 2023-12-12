@@ -44,13 +44,13 @@ userController.crearUsuario = async (req, res) => {
         const { username, password, email, avatarURL } = req.body;
         let existUser = await userModel.findOne({ username: username });
         if (!existUser) {
-            const cryptoPass = require('crypto')
+            /*const cryptoPass = require('crypto')
                 .createHash('sha256')
                 .update(password)
-                .digest('hex');
+                .digest('hex');*/
             const nuevoUsuario = new userModel({
                 username: username,
-                password: cryptoPass,
+                password: password,
                 email: email,
                 avatarURL: avatarURL
             });

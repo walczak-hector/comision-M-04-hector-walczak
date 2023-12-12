@@ -12,7 +12,7 @@ import { traerDatosDePosteoPorID } from './../utils/llamados.js';
 
 const FormularioEditar = (props) => {
     const { id, usuario, token } = props;
-    const url = 'http://localhost:3000/publicacion';
+    const url = 'http://localhost:3000/post';
 
     const [titulo, setTitulo] = useState('');
     const [descripcion, setDescripcion] = useState('');
@@ -52,8 +52,8 @@ const FormularioEditar = (props) => {
     const mandarDatos = async () => {
         const datos = {
             id: id,
-            titulo: titulo,
-            descripcion: descripcion,
+            title: titulo,
+            description: descripcion,
         }
 
         const headers = {

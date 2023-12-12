@@ -1,11 +1,11 @@
 const PosteoModel = require('./../models/model.post.js');
 
-const { verificarToken } = require('./../../utils/token.js');
+const { verificarToken } = require('./../utils/token.js');
 
 const PosteosController = {}
 
 // Ver publicaciones
-PosteosController.verPosteos = async (req, res) => {
+PosteosController.verPosts = async (req, res) => {
     try {
         const listaPosteos = await PosteoModel.find().populate('autor');
         
@@ -19,7 +19,7 @@ PosteosController.verPosteos = async (req, res) => {
 }
 
 // Ver publicación
-PosteosController.verPosteo = async (req, res) => {
+PosteosController.verPost = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -41,7 +41,7 @@ PosteosController.verPosteo = async (req, res) => {
 }
 
 // Crear publicación
-PosteosController.crearPosteo = async (req, res) => {
+PosteosController.crearPost = async (req, res) => {
     try {
         const { titulo, descripcion } = req.body;
 
@@ -52,15 +52,14 @@ PosteosController.crearPosteo = async (req, res) => {
         if (!tokenValido) {
             return res.status(500).json({
                 mensaje: 'El token no es válido',
-                error: error
             });
         }
 
         const autor = tokenValido.id;
 
         const nuevoPosteo = new PosteoModel({
-            titulo: titulo,
-            descripcion: descripcion,
+            title: titulo,
+            description: descripcion,
             autor: autor,
         });
 
@@ -69,14 +68,13 @@ PosteosController.crearPosteo = async (req, res) => {
         return res.json({ mensaje: 'Publicación creada con éxito' });
     } catch (error) {
         return res.status(500).json({
-            mensaje: 'Ocurrió un error interno al intentar crear la publicación',
-            error: error
+            mensaje: 'Ocurrió un error interno al intentar crear la publicación ' + error,
         });
     }
 }
 
 // Editar publicación
-PosteosController.editarPosteo = async (req, res) => {
+PosteosController.editarPost = async (req, res) => {
     try {
         const { id, titulo, descripcion } = req.body;
         const { token } = req.headers;
@@ -113,7 +111,7 @@ PosteosController.editarPosteo = async (req, res) => {
 }
 
 // Eliminar publicación
-PosteosController.eliminarPosteo = async (req, res) => {
+PosteosController.eliminarPost = async (req, res) => {
     try {
         const { id } = req.body;
 

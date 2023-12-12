@@ -8,18 +8,18 @@ const {
 } = require('./../controllers/controller.post.js');
 
 // Ver posts
-userRouter.get('/posts', verPosts);
+postRouter.get('/posts', verPosts);
 
 // Ver post
-userRouter.get('/post/:id', verPost);
+postRouter.get('/post/:id', verPost);
 
 // Crear post
-userRouter.post('/post', crearPost);
+postRouter.post('/post', crearPost);
 
 // Editar post
-userRouter.put('/post', editarPost);
+postRouter.put('/post', editarPost);
 
 // Eliminar post
-userRouter.delete('/post', eliminarPost);
+postRouter.delete('/post', eliminarPost);
 
 module.exports = postRouter;

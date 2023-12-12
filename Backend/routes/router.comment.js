@@ -7,15 +7,15 @@ const {
 } = require('./../controllers/controller.comment.js');
 
 // Ver comentarios
-userRouter.get('/comentarios/:idPosteo', verComments);
+commentRouter.get('/comentarios/:idPosteo', verComments);
 
 // Crear comentario
-userRouter.post('/comentarios', crearComment);
+commentRouter.post('/comentarios', crearComment);
 
 // Editar comentario
-userRouter.put('/comentarios', editarComment);
+commentRouter.put('/comentarios', editarComment);
 
 // Eliminar comentario
-userRouter.delete('/comentarios', eliminarComment);
+commentRouter.delete('/comentarios', eliminarComment);
 
 module.exports = commentRouter;

@@ -12,7 +12,7 @@ const Inicio = () => {
   const { usuario } = useAuthContext();
 
   const cargarLista = async () => {
-    const url = 'http://localhost:3000/publicaciones';
+    const url = 'http://localhost:3000/posts';
 
     //const respuesta = await axios.get(url);
     let respuesta = await fetch(url);
@@ -30,7 +30,7 @@ const Inicio = () => {
 
   return (
     <Card.Body>
-      { usuario ? ('Bienvenid@ ' + usuario.nombres) : 'No se inició sesión' }
+      { usuario ? ('Bienvenid@ ' + usuario.username) : 'No se inició sesión' }
       <TablaDeDatos lista={lista} usuario={usuario} />
     </Card.Body>
   )

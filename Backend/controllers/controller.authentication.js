@@ -3,15 +3,15 @@ const UsuarioModel = require('./../models/model.user');
 
 const AutenticacionController = {}
 
-const JWT_KEY = process.env.JWT_KEY;
+const JWT_KEY = process.env.SECRET_KEY;
 
 AutenticacionController.autenticar = async (req, res) => {
     try {
-        const { usuario, contrasenia } = req.body;
+        const { username, password } = req.body;
 
         const usuarioEncontrado = await UsuarioModel.findOne({
-            usuario: usuario,
-            contrasenia: contrasenia,
+            username: username,
+            password: password,
         });
 
         if (!usuarioEncontrado) {
@@ -20,9 +20,9 @@ AutenticacionController.autenticar = async (req, res) => {
 
         const datos = {
             id: usuarioEncontrado._id,
-            usuario: usuarioEncontrado.usuario,
-            nombres: usuarioEncontrado.nombres,
-            apellidos: usuarioEncontrado.apellidos,
+            username: usuarioEncontrado.username,
+            email: usuarioEncontrado.email,
+            avatarURL: usuarioEncontrado.avatarURL,
         }
 
         let token = jwt.sign(datos, JWT_KEY, { expiresIn: '1h' });

@@ -8,9 +8,9 @@ const express = require('express');
 const conectarMongo = require('./config/config.mongoose.js');
 
 const userRouter = require('./routes/router.user.js');
-//const postRouter = require('./routes/router.post.js');
+const postRouter = require('./routes/router.post.js');
 //const commentRouter = require('./routes/router.comment.js');
-//const autenticacionRouter = require('./routes/autenticacionRoutes.js');
+const autenticacionRouter = require('./routes/router.authenticate.js');
 //const archivoRouter = require('./routes/archivoRouter.js');
 //const georefRouter = require('./routes/georefRouter.js');
 
@@ -26,7 +26,9 @@ const PORT = process.env.PORT || 5000;
 
 // Rutas
 app.use(userRouter);
-//app.use(autenticacionRouter);
+app.use(postRouter);
+//app.use(commentRouter);
+app.use(autenticacionRouter);
 //app.use(archivoRouter);
 //app.use(georefRouter);
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 const url = 'http://localhost:3000/';
 
 const traerDatosDePosteoPorID = async (id) => {
-    const endpoint = url + 'publicacion/' + id;
+    const endpoint = url + 'post/' + id;
 
     try {
         const respuesta = await axios.get(endpoint);

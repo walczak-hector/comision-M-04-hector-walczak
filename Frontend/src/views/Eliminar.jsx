@@ -22,7 +22,7 @@ const Eliminar = () => {
         setDeshabilitarBoton(true);
         
         try {
-            const url = 'http://localhost:3000/publicacion';
+            const url = 'http://localhost:3000/post';
             const respuesta = await axios.delete(url, { data: { id: id } });
 
             if (respuesta.status === 200) {
@@ -31,7 +31,7 @@ const Eliminar = () => {
                 setError('Ocurrió un error inesperado');
             }
         } catch (error) {
-            setError('Ocurrió un error inesperado');
+            setError('Ocurrió un error inesperado dqwdw');
         }
 
         setDeshabilitarBoton(false);

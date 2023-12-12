@@ -7,8 +7,8 @@ import { guardarDatos, guardarToken } from '../utils/login';
 import { useAuthContext } from '../context/AuthContext';
 
 const Login = () => {
-  const [usuario, setUsuario] = useState('');
-  const [contrasenia, setContrasenia] = useState('');
+  const [username, setUsuario] = useState('');
+  const [password, setContrasenia] = useState('');
   const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
   const [errores, setErrores] = useState({});
 
@@ -26,12 +26,12 @@ const Login = () => {
   const verificarDatos = async () => {
     let misErrores = {}
 
-    if (usuario.length === 0) {
-      misErrores.usuario = 'Debe introducir un usuario.';
+    if (username.length === 0) {
+      misErrores.username = 'Debe introducir un usuario.';
     }
 
-    if (contrasenia.length === 0) {
-      misErrores.contrasenia = 'Debe introducir una contraseña.';
+    if (password.length === 0) {
+      misErrores.password = 'Debe introducir una contraseña.';
     }
 
     setErrores(misErrores);
@@ -47,8 +47,8 @@ const Login = () => {
     const url = 'http://localhost:3000/autenticar';
 
     const datos = {
-      usuario: usuario,
-      contrasenia: contrasenia,
+      username: username,
+      password: password,
     }
 
     try {
@@ -76,9 +76,9 @@ const Login = () => {
           <Form.Label>Usuario</Form.Label>
           <Form.Control type="text" placeholder="Usuario" onInput={cambiarUsuario} />
           {
-            errores.usuario && (
+            errores.username && (
               <Form.Text style={{ color: 'red' }}>
-                { errores.usuario }
+                { errores.username }
               </Form.Text>
             )
           }
@@ -88,9 +88,9 @@ const Login = () => {
           <Form.Label>Contraseña</Form.Label>
           <Form.Control type="password" placeholder="Contraseña" onInput={cambiarContrasenia} />
           {
-            errores.contrasenia && (
+            errores.password && (
               <Form.Text style={{ color: 'red' }}>
-                { errores.contrasenia }
+                { errores.password }
               </Form.Text>
             )
           }

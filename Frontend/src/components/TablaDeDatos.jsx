@@ -36,8 +36,8 @@ const TablaDeDatos = (props) => {
                     lista.map((item, key) => (
                         <tr key={key}>
                             <td>{ key + 1 }</td>
-                            <td>{ item.titulo }</td>
-                            <td>{ item.autor.apellidos + ' ' + item.autor.nombres }</td>
+                            <td>{ item.title }</td>
+                            <td>{ item.autor.username + ' ' + item.autor.email }</td>
                             <td>
                                 <ButtonGroup style={{ maxWidth: '30px' }}>
                                     <Button variant="success" onClick={() => ver(item._id)}>
@@ -45,12 +45,12 @@ const TablaDeDatos = (props) => {
                                     </Button>
                                     
                                     {
-                                        usuario && (usuario.id === item.autor._id) && (
+                                        usuario && (usuario.id === item.autor.id) && (
                                             <>
-                                                <Button variant="primary" onClick={() => editar(item._id)}>
+                                                <Button variant="primary" onClick={() => editar(item.id)}>
                                                     Editar
                                                 </Button>
-                                                <Button variant="danger" onClick={() => eliminar(item._id)}>
+                                                <Button variant="danger" onClick={() => eliminar(item.id)}>
                                                     Eliminar
                                                 </Button>
                                             </>

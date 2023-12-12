@@ -13,13 +13,9 @@ const postSchema = new Schema({
 		type: mongoose.Schema.ObjectId, 
 		ref: "users",
 	},
-	comments:{
-		type: mongoose.Schema.ObjectId, 
-		ref: "comments",
-	},
 	imageURL:{
 		type: String,
-		required:true
+		//required:true
     },
 	createdAt:{
 		type: Date,

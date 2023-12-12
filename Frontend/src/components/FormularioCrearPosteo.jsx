@@ -49,7 +49,7 @@ const FormularioCrearPosteo = () => {
     }
 
     const mandarDatos = async () => {
-        const url = 'http://localhost:3000/publicacion';
+        const url = 'http://localhost:3000/post';
 
         const datos = {
             titulo: titulo,
