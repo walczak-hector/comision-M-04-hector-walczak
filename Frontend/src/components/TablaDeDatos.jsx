@@ -40,7 +40,7 @@ const TablaDeDatos = (props) => {
                             <td>{ item.autor.username + ' ' + item.autor.email }</td>
                             <td>
                                 <ButtonGroup style={{ maxWidth: '30px' }}>
-                                    <Button variant="success" onClick={() => ver(item._id)}>
+                                    <Button variant="success" onClick={() => ver(item.id)}>
                                         Ver
                                     </Button>
                                     

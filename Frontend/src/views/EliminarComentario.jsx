@@ -3,30 +3,33 @@ import { Card } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
 
-const Eliminar = () => {
+const EliminarComentario = () => {
     const [error, setError] = useState(false);
     const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
 
     const navigate = useNavigate();
     const { id } = useParams();
 
+    const location = useLocation();
+    const postId = location.state ? location.state.postId : null;
+
     const volver = () => {
-        navigate('/');
+        navigate(`/ver/${postId}`);
     }
 
     const eliminar = async () => {
         setError(false);
         setDeshabilitarBoton(true);
-        
+
         try {
-            const url = 'http://localhost:3000/post';
+            const url = 'http://localhost:3000/comentario';
             const respuesta = await axios.delete(url, { data: { id: id } });
 
             if (respuesta.status === 200) {
-                return navigate('/');
+                return navigate(`/ver/${postId}`);
             } else {
                 setError('Ocurrió un error inesperado');
             }
@@ -40,13 +43,13 @@ const Eliminar = () => {
     return (
         <Card.Body>
             <Alert variant="warning">
-                ¿Está seguro que desea eliminar la publicación con ID {id}?
+                ¿Está seguro que desea eliminar el comentario con ID {id}?
             </Alert>
 
             {
                 error && (
                     <Alert variant="danger">
-                        { error }
+                        {error}
                     </Alert>
                 )
             }
@@ -63,4 +66,4 @@ const Eliminar = () => {
     )
 }
 
-export default Eliminar
+export default EliminarComentario

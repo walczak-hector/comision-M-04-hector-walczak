@@ -8,22 +8,17 @@ import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-import { traerDatosDePosteoPorID } from './../utils/llamados.js';
+import { traerDatosDeComentarioPorID } from './../utils/llamados.js';
 
-const FormularioEditar = (props) => {
-    const { id, usuario, token } = props;
-    const url = 'http://localhost:3000/post';
+const FormularioEditarComentario = (props) => {
+    const { id, postId, usuario, token } = props;
+    const url = 'http://localhost:3000/comentario';
 
-    const [titulo, setTitulo] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
     const [errores, setErrores] = useState({});
 
     const navigate = useNavigate();
-
-    const cambiarTitulo = (e) => {
-        setTitulo(e.target.value);
-    }
 
     const cambiarDescripcion = (e) => {
         setDescripcion(e.target.value);
@@ -31,10 +26,6 @@ const FormularioEditar = (props) => {
 
     const verificarDatos = async () => {
         let misErrores = {}
-
-        if (titulo.length === 0) {
-            misErrores.titulo = 'Debe introducir al menos un titulo.';
-        }
         
         if (descripcion.length === 0) {
             misErrores.descripcion = 'Debe introducir al menos una descripcion.';
@@ -52,7 +43,6 @@ const FormularioEditar = (props) => {
     const mandarDatos = async () => {
         const datos = {
             id: id,
-            titulo: titulo,
             descripcion: descripcion,
         }
 
@@ -64,7 +54,7 @@ const FormularioEditar = (props) => {
             const respuesta = await axios.put(url, datos, { headers: headers });
 
             if (respuesta.status === 200) {
-                return navigate('/');
+                return navigate(`/ver/${postId}`);
             } else {
                 setErrores({ error: 'Ocurrió un error inesperado' });
             }
@@ -77,21 +67,18 @@ const FormularioEditar = (props) => {
 
     const traerDatos = async () => {
         if (usuario) {
-            const respuesta = await traerDatosDePosteoPorID(id);
-
+            const respuesta = await traerDatosDeComentarioPorID(id);
             if (respuesta) {
                 if (usuario.id !== respuesta.autor) {
-                    return navigate('/');
+                    return navigate(`/ver/${postId}`);
                 }
-
-                setTitulo(respuesta.title);
                 setDescripcion(respuesta.description);
             } else {
-                setErrores({ error: 'Ocurrió un error inesperado. No se pudo obtener la publicación' });
+                setErrores({ error: 'Ocurrió un error inesperado. No se pudo obtener el comentario' });
                 setDeshabilitarBoton(true);
             }
         } else {
-            return navigate('/');
+            return navigate(`/ver/${postId}`);
         }
     }
 
@@ -101,22 +88,6 @@ const FormularioEditar = (props) => {
 
     return (
         <Form>
-            <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-                <Form.Label column sm="2">
-                    Título
-                </Form.Label>
-                <Col sm="10">
-                    <Form.Control type="text" onInput={cambiarTitulo} defaultValue={titulo} />
-                    {
-                        errores.titulo && (
-                            <span style={{ color: 'red' }}>
-                                {errores.titulo}
-                            </span>
-                        )
-                    }
-                </Col>
-            </Form.Group>
-
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                 <Form.Label column sm="2">
                     Descripción
@@ -142,10 +113,10 @@ const FormularioEditar = (props) => {
             }
 
             <Button variant="primary" onClick={verificarDatos} disabled={deshabilitarBoton}>
-                Editar Publicación
+                Editar Comentario
             </Button>
         </Form>
     );
 }
 
-export default FormularioEditar;
+export default FormularioEditarComentario;

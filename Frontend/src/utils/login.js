@@ -1,4 +1,3 @@
-
 export const guardarDatos = (datos) => {
     const valorTexto = JSON.stringify(datos);
 

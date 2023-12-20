@@ -8,7 +8,8 @@ import Editar from './views/Editar.jsx';
 import Ver from './views/Ver.jsx';
 import Login from './views/Login.jsx';
 import CrearPosteo from './views/CrearPosteo.jsx';
-
+import EliminarComentario from './views/EliminarComentario.jsx';
+import EditarComentario from './views/EditarComentario.jsx'
 const rutas = createBrowserRouter([
     {
         path: "/",
@@ -31,6 +32,12 @@ const rutas = createBrowserRouter([
     }, {
         path: "/login",
         element: <Login />
+    },{
+        path: "/eliminarcomentario/:id",
+        element: <EliminarComentario />,
+    }, {
+        path: "/editarcomentario/:id",
+        element: <EditarComentario />,
     }
 ]);
 

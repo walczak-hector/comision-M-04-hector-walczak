@@ -98,7 +98,7 @@ PosteosController.editarPost = async (req, res) => {
 
         await PosteoModel.findByIdAndUpdate(
             id,
-            { titulo: titulo, descripcion: descripcion }
+            { title: titulo, description: descripcion }
         );
 
         return res.json({ mensaje: 'Publicación actualizada con éxito' });
